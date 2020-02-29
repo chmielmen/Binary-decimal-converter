@@ -12,6 +12,7 @@ public class App {
         System.out.println("You want to convert: ");
         System.out.println("DECIMAL - type d");
         System.out.println("BINARY - type b");
+        System.out.println("exit - type q");
 
         try {
             char command = (char) System.in.read();
@@ -30,13 +31,17 @@ public class App {
             } else if (command == 'b') {
                 System.out.println("Type binary number: ");
                 String binary = scanner.next();
+                int binaryInt = Integer.parseInt(binary);
 
-                if ((binary.contains("0") && binary.contains("1")) || binary.equals("0") || binary.equals("1")) {
+                if (((binary.contains("0") || binary.contains("1")) && (binaryInt < binaryInt + 1))) {
                     ToDecimal.toDecimal(binary);
                 } else {
                     System.out.println("Wrong number, try again");
                     main(null);
                 }
+            } else if (command == 'q') {
+                System.out.println(">>> GOOD BYE <<<");
+                System.exit(0);
             } else {
                 System.out.println("Wrong command, try again");
                 main(null);
@@ -44,6 +49,9 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InputMismatchException e) {
+            System.out.println("Wrong command, try again \n");
+            main(null);
+        } catch (NumberFormatException e) {
             System.out.println("Wrong command, try again \n");
             main(null);
         }
